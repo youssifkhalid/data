@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>إدخال بيانات الطالب - مدرسة النوبارية الثانوية العسكرية</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
 
@@ -17,6 +18,8 @@
             --success-color: #2ecc71;
             --warning-color: #e74c3c;
             --whatsapp-color: #25D366;
+            --gradient-start: #2980b9;
+            --gradient-end: #3498db;
         }
 
         * {
@@ -27,14 +30,18 @@
         }
 
         body {
-            background-color: var(--primary-color);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: var(--text-color);
             line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .container {
             max-width: 800px;
-            margin: 0 auto;
+            width: 100%;
             padding: 20px;
         }
 
@@ -42,89 +49,173 @@
             text-align: center;
             margin-bottom: 40px;
             padding: 20px;
-            background-color: var(--secondary-color);
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shine 2s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
         }
 
         header h1 {
-            font-size: 2em;
-            color: var(--accent-color);
+            font-size: 2.5em;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .form-container {
-            background-color: var(--secondary-color);
+            background: rgba(45, 52, 70, 0.95);
             padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            position: relative;
         }
 
-        label {
+        .form-group label {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             font-weight: 600;
+            color: var(--accent-color);
+            transition: all 0.3s ease;
         }
 
-        input, select {
+        .form-group input,
+        .form-group select {
             width: 100%;
-            padding: 10px;
-            border: 1px solid var(--border-color);
-            border-radius: 5px;
-            background-color: var(--primary-color);
+            padding: 12px 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            background: rgba(26, 31, 44, 0.8);
             color: var(--text-color);
             font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+            outline: none;
+        }
+
+        .grade-input {
+            position: relative;
+        }
+
+        .max-grade {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent-color);
+            font-size: 14px;
+            pointer-events: none;
+        }
+
+        .total-score {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
         }
 
         button {
-            background-color: var(--accent-color);
-            color: var(--text-color);
-            padding: 12px 24px;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+            padding: 15px 30px;
             border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
+            border-radius: 10px;
+            font-size: 18px;
             font-weight: 600;
-            transition: background-color 0.3s ease;
+            cursor: pointer;
+            transition: all 0.3s ease;
             width: 100%;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            position: relative;
+            overflow: hidden;
         }
 
         button:hover {
-            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
         }
 
-        .whatsapp-button {
-            background-color: var(--whatsapp-color);
-        }
-
-        .whatsapp-button:hover {
-            background-color: #128C7E;
-        }
-
-        .success-message, .error-message {
+        .success-message,
+        .error-message {
             margin-top: 20px;
             padding: 15px;
-            border-radius: 5px;
+            border-radius: 10px;
             text-align: center;
             font-weight: 600;
+            animation: slideIn 0.5s ease-out;
         }
 
-        .success-message {
-            background-color: var(--success-color);
-            color: var(--text-color);
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .error-message {
-            background-color: var(--warning-color);
-            color: var(--text-color);
-        }
-
-        .hidden {
+        .loader {
+            width: 50px;
+            height: 50px;
+            border: 5px solid var(--border-color);
+            border-top: 5px solid var(--accent-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
             display: none;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .invalid-feedback {
+            color: var(--warning-color);
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        input:invalid + .invalid-feedback {
+            display: block;
         }
 
         @media (max-width: 768px) {
@@ -133,7 +224,7 @@
             }
             
             header h1 {
-                font-size: 1.5em;
+                font-size: 1.8em;
             }
             
             .form-container {
@@ -144,11 +235,11 @@
 </head>
 <body>
     <div class="container">
-        <header>
+        <header class="animate__animated animate__fadeInDown">
             <h1><i class="fas fa-user-graduate"></i> إدخال بيانات الطالب</h1>
         </header>
 
-        <div class="form-container">
+        <div class="form-container animate__animated animate__fadeInUp">
             <form id="studentForm">
                 <div class="form-group">
                     <label for="fullName"><i class="fas fa-user"></i> الاسم بالكامل</label>
@@ -180,150 +271,216 @@
 
                 <div id="subjectsContainer"></div>
 
-                <button type="submit"><i class="fas fa-save"></i> حفظ البيانات</button>
+                <div id="totalScore" class="total-score" style="display: none;">
+                    المجموع الكلي: <span id="totalScoreValue">0</span> / 380
+                </div>
+
+                <button type="submit" class="animate__animated animate__pulse animate__infinite">
+                    <i class="fas fa-save"></i> حفظ البيانات
+                </button>
             </form>
+
             <button id="whatsappButton" class="whatsapp-button" style="display: none;">
                 <i class="fab fa-whatsapp"></i> إرسال رسالة واتساب
             </button>
         </div>
 
-        <div id="successMessage" class="success-message hidden">
+        <div id="loader" class="loader"></div>
+
+        <div id="successMessage" class="success-message" style="display: none;">
             <i class="fas fa-check-circle"></i> تم حفظ بيانات الطالب بنجاح!
         </div>
 
-        <div id="errorMessage" class="error-message hidden">
+        <div id="errorMessage" class="error-message" style="display: none;">
             <i class="fas fa-exclamation-circle"></i> حدث خطأ أثناء حفظ البيانات. يرجى المحاولة مرة أخرى.
         </div>
     </div>
 
     <script>
-    // Initialize the data structure
-let studentData = {};
-
-const subjects = {
-    first: [
-        "اللغة العربية",
-        "اللغة الإنجليزية",
-        "الرياضيات",
-        "العلوم المتكامله",
-        "التاريخ",
-        "الجغرافيا"
-    ],
-    second: {
-        scientific: [
-            "اللغة العربية",
-            "اللغة الإنجليزية",
-            "بحته",
-            "تطبيقيه",
-            "الكيمياء",
-            "الأحياء",
-            "فيزياء"
-        ],
-        literary: [
-            "اللغة العربية",
-            "اللغة الإنجليزية",
-            "التاريخ",
-            "الجغرافيا",
-            "الفلسفة",
-            "علم النفس",
-            "رياضه ادبي"
-        ]
-    }
-};
-
-document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('studentForm');
-    const gradeSelect = document.getElementById('grade');
-    const sectionContainer = document.getElementById('sectionContainer');
-    const sectionSelect = document.getElementById('section');
-    const subjectsContainer = document.getElementById('subjectsContainer');
-    const successMessage = document.getElementById('successMessage');
-    const errorMessage = document.getElementById('errorMessage');
-    const whatsappButton = document.getElementById('whatsappButton');
-
-    gradeSelect.addEventListener('change', updateSubjects);
-    sectionSelect.addEventListener('change', updateSubjects);
-
-    function updateSubjects() {
-        const grade = gradeSelect.value;
-        const section = sectionSelect.value;
-
-        sectionContainer.style.display = grade === 'second' ? 'block' : 'none';
-        
-        if (grade === 'second' && !section) {
-            subjectsContainer.innerHTML = '';
-            return;
-        }
-
-        let currentSubjects = grade === 'first' ? subjects.first : subjects.second[section];
-
-        subjectsContainer.innerHTML = '';
-        currentSubjects.forEach(subject => {
-            const subjectDiv = document.createElement('div');
-            subjectDiv.className = 'form-group';
-            subjectDiv.innerHTML = `
-                <label for="${subject}"><i class="fas fa-book"></i> ${subject}</label>
-                <input type="number" id="${subject}" name="${subject}" min="0" max="20" required>
-            `;
-            subjectsContainer.appendChild(subjectDiv);
-        });
-    }
-
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const formData = new FormData(form);
-        const studentInfo = Object.fromEntries(formData);
-
-        const grade = studentInfo.grade;
-        const section = studentInfo.section;
-        const studentId = studentInfo.studentId;
-        const fullName = studentInfo.fullName;
-
-        let studentEntry = {
-            name: fullName,
-            scores: {}
+        const maxGrades = {
+            scientific: {
+                "اللغة العربية": 80,
+                "اللغة الأجنبية الأولى": 60,
+                "الرياضيات": 60,
+                "الأحياء": 60,
+                "الفيزياء": 60,
+                "الكيمياء": 60
+            },
+            literary: {
+                "اللغة العربية": 80,
+                "اللغة الأجنبية الأولى": 60,
+                "الرياضيات": 60,
+                "علم النفس": 60,
+                "التاريخ": 60,
+                "الجغرافيا": 60
+            },
+            first: {
+                "اللغة العربية": 80,
+                "اللغة الإنجليزية": 60,
+                "الرياضيات": 60,
+                "العلوم المتكامله": 60,
+                "التاريخ": 60,
+                "الجغرافيا": 60
+            }
         };
 
-        let currentSubjects = grade === 'first' ? subjects.first : subjects.second[section];
-        currentSubjects.forEach(subject => {
-            studentEntry.scores[subject] = parseInt(studentInfo[subject]);
+        let studentData = {};
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('studentForm');
+            const gradeSelect = document.getElementById('grade');
+            const sectionContainer = document.getElementById('sectionContainer');
+            const sectionSelect = document.getElementById('section');
+            const subjectsContainer = document.getElementById('subjectsContainer');
+            const totalScoreDiv = document.getElementById('totalScore');
+            const totalScoreValue = document.getElementById('totalScoreValue');
+
+            function updateSubjects() {
+                const grade = gradeSelect.value;
+                const section = sectionSelect.value;
+                let currentSubjects;
+
+                if (grade === 'first') {
+                    currentSubjects = maxGrades.first;
+                    sectionContainer.style.display = 'none';
+                } else if (grade === 'second') {
+                    sectionContainer.style.display = 'block';
+                    currentSubjects = section === 'scientific' ? maxGrades.scientific : maxGrades.literary;
+                }
+
+                if (!currentSubjects) {
+                    subjectsContainer.innerHTML = '';
+                    totalScoreDiv.style.display = 'none';
+                    return;
+                }
+
+                subjectsContainer.innerHTML = '';
+                Object.entries(currentSubjects).forEach(([subject, maxGrade]) => {
+                    const div = document.createElement('div');
+                    div.className = 'form-group';
+                    div.innerHTML = `
+                        <label for="${subject}"><i class="fas fa-book"></i> ${subject}</label>
+                        <div class="grade-input">
+                            <input type="number" 
+                                id="${subject}" 
+                                name="${subject}" 
+                                min="0" 
+                                max="${maxGrade}" 
+                                required 
+                                placeholder="أقصى درجة: ${maxGrade}"
+                                oninput="updateTotalScore()"
+                            >
+                            <span class="max-grade">${maxGrade}</span>
+                            <div class="invalid-feedback">الدرجة يجب أن تكون بين 0 و ${maxGrade}</div>
+                        </div>
+                    `;
+                    subjectsContainer.appendChild(div);
+                });
+
+                totalScoreDiv.style.display = 'block';
+                updateTotalScore();
+            }
+
+            window.updateTotalScore = function() {
+                let total = 0;
+                const inputs = subjectsContainer.querySelectorAll('input[type="number"]');
+                inputs.forEach(input => {
+                    total += parseInt(input.value || 0);
+                });
+                totalScoreValue.textContent = total;
+                
+                // Animate the total score when it changes
+                totalScoreDiv.classList.add('animate__animated', 'animate__pulse');
+                setTimeout(() => {
+                    totalScoreDiv.classList.remove('animate__animated', 'animate__pulse');
+                }, 1000);
+            }
+
+            gradeSelect.addEventListener('change', updateSubjects);
+            sectionSelect.addEventListener('change', updateSubjects);
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const loader = document.getElementById('loader');
+                const successMessage = document.getElementById('successMessage');
+                const errorMessage = document.getElementById('errorMessage');
+                const whatsappButton = document.getElementById('whatsappButton');
+
+                loader.style.display = 'block';
+                
+                const formData = new FormData(form);
+                const studentInfo = Object.fromEntries(formData);
+
+                const studentEntry = {
+                    name: studentInfo.fullName,
+                    scores: {}
+                };
+
+                // Get current subjects based on grade and section
+                let currentSubjects;
+                if (studentInfo.grade === 'first') {
+                    currentSubjects = maxGrades.first;
+                } else if (studentInfo.grade === 'second') {
+                    currentSubjects = studentInfo.section === 'scientific' ? maxGrades.scientific : maxGrades.literary;
+                }
+
+                // Validate and collect scores
+                Object.keys(currentSubjects).forEach(subject => {
+                    const score = parseInt(studentInfo[subject]);
+                    if (score > currentSubjects[subject]) {
+                        throw new Error(`الدرجة المدخلة لمادة ${subject} تتجاوز الحد الأقصى`);
+                    }
+                    studentEntry.scores[subject] = score;
+                });
+
+                // Save student data
+                studentData[studentInfo.studentId] = studentEntry;
+
+                // Simulate API call
+                setTimeout(() => {
+                    try {
+                        // Create and download JSON file
+                        const jsonData = JSON.stringify(studentData, null, 2);
+                        const blob = new Blob([jsonData], { type: 'application/json' });
+                        const url = URL.createObjectURL(blob);
+                        
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = 'students_data.json';
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                        URL.revokeObjectURL(url);
+
+                        // Show success message
+                        successMessage.style.display = 'block';
+                        errorMessage.style.display = 'none';
+                        whatsappButton.style.display = 'block';
+
+                        // Reset form
+                        form.reset();
+                        subjectsContainer.innerHTML = '';
+                        totalScoreDiv.style.display = 'none';
+                        sectionContainer.style.display = 'none';
+                    } catch (error) {
+                        errorMessage.textContent = error.message;
+                        errorMessage.style.display = 'block';
+                        successMessage.style.display = 'none';
+                    } finally {
+                        loader.style.display = 'none';
+                    }
+                }, 1500);
+            });
+
+            // WhatsApp button functionality
+            document.getElementById('whatsappButton').addEventListener('click', function() {
+                const phoneNumber = '+201092812463';
+                const message = 'نجحني';
+                const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+                window.open(whatsappUrl, '_blank');
+            });
         });
-
-        // Save student data with ID as the key
-        studentData[studentId] = studentEntry;
-
-        // Create and download JSON file
-        const jsonData = JSON.stringify(studentData, null, 2);
-        const blob = new Blob([jsonData], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-        
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'students_data.json';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
-
-        // Show success message and WhatsApp button
-        successMessage.classList.remove('hidden');
-        errorMessage.classList.add('hidden');
-        whatsappButton.style.display = 'block';
-
-        // Reset form
-        form.reset();
-        subjectsContainer.innerHTML = '';
-        sectionContainer.style.display = 'none';
-    });
-
-    whatsappButton.addEventListener('click', function() {
-        const phoneNumber = '+201092812463';
-        const message = 'نجحني';
-        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-        window.open(whatsappUrl, '_blank');
-    });
-});
     </script>
 </body>
 </html>
